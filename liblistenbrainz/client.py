@@ -411,6 +411,26 @@ class ListenBrainz:
         """
         return self._get_user_entity(username, 'releases', count, offset, time_range)
 
+    def get_user_release_groups(self, username, count=25, offset=0, time_range='all_time'):
+        """ Get release groups for user 'username', sorted in descending order of listen count.
+
+        :param username: the username of the user whose release groups are to be fetched.
+        :type username: str
+
+        :param count: the number of release groups to fetch, defaults to 25, maximum is 100.
+        :type count: int, optional
+
+        :param offset: the number of release groups to skip from the beginning, for pagination, defaults to 0.
+        :type offset: int, optional
+
+        :param time_range: the time range, can be 'week', 'month', 'quarter', 'half_yearly', 'year', 'this_week', 'this_month', 'this_year' or 'all_time'.
+        :type time_range: str
+
+        :return: the release groups listened to by the user in the time range with listen counts and other data
+        :rtype: dict
+        """
+        return self._get_user_entity(username, 'release-groups', count, offset, time_range)
+
 
     def get_user_recommendation_recordings(self, username, artist_type='top', count=25, offset=0):
         """ Get recommended recordings for a user.
