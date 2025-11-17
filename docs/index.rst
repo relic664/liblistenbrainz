@@ -41,6 +41,10 @@ Features
 liblistenbrainz provides easy access to all ListenBrainz endpoints, handles
 ratelimits automatically and supports the ListenBrainz authorization flow.
 
+Note that automatic rate limiting is applied to the ``liblistenbrainz.ListenBrainz()``
+client; therefore rate limits may be exceeded in cases where multiple clients are 
+initialized (resulting in 403 errors from the ListenBrainz Web API).
+
 For details on the API endpoints that can be used via liblistenbrainz, take
 a look at the `ListenBrainz API Documentation <https://listenbrainz.readthedocs.io/en/production/dev/api/>`_.
 
