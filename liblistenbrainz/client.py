@@ -41,17 +41,18 @@ STATS_SUPPORTED_TIME_RANGES = (
 )
 
 
-API_BASE_URL = 'https://api.listenbrainz.org'
+
 
 class ListenBrainz:
 
-    def __init__(self):
+    def __init__(self, API_BASE_URL = 'https://api.listenbrainz.org'):
         self._auth_token = None
 
         # initialize rate limit variables with None
         self._last_request_ts = None
         self.remaining_requests = None
         self.ratelimit_reset_in = None
+        self._API_BASE_URL = API_BASE_URL
 
 
     def _require_auth_token(self):
@@ -105,7 +106,7 @@ class ListenBrainz:
         try:
             self._wait_until_rate_limit()
             response = session.get(
-                urljoin(API_BASE_URL, endpoint),
+                urljoin(self._API_BASE_URL, endpoint),
                 params=params,
                 headers=headers,
             )
@@ -139,7 +140,7 @@ class ListenBrainz:
         try:
             self._wait_until_rate_limit()
             response = session.post(
-                urljoin(API_BASE_URL, endpoint),
+                urljoin(self._API_BASE_URL, endpoint),
                 data=data,
                 headers=headers,
             )
